@@ -5,3 +5,4 @@
 3. **Backend Standards**: Java 17, Spring Boot 3. Use Lombok. Enforce Domain Driven Design as detailed in the `spring-boot-architecture` skill.
 4. **Git Operations**: Never force push to `main`. Ensure CI workflows are respected.
 5. **No Placeholders**: When building features, write fully complete, functional code instead of `# TODO` placeholders unless specifically instructed.
+6. **Documentation**: The `README.md` is the absolute source of truth for this project. As new features, microservices, or tools are implemented, the agent MUST regularly update the `README.md` to reflect these changes.
