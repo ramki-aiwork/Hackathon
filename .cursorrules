@@ -1,0 +1,7 @@
+# Hackathon Management Application - Project Rules
+
+1. **AI Workflows**: Always use `/run-local` to start the environment and `/create-microservice` to scaffold new microservices.
+2. **Frontend Standards**: Stick strictly to React Router v6, Redux Toolkit, and TanStack React Query. Always respect the CSS Abstraction layer (`ThemeContext`)—do not inject raw CSS everywhere directly.
+3. **Backend Standards**: Java 17, Spring Boot 3. Use Lombok. Enforce Domain Driven Design as detailed in the `spring-boot-architecture` skill.
+4. **Git Operations**: Never force push to `main`. Ensure CI workflows are respected.
+5. **No Placeholders**: When building features, write fully complete, functional code instead of `# TODO` placeholders unless specifically instructed.
