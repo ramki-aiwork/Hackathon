@@ -1,0 +1,67 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:15-alpine
+    container_name: hackathon-postgres
+    environment:
+      POSTGRES_USER: hackathon_user
+      POSTGRES_PASSWORD: hackathon_password
+      POSTGRES_DB: hackathon_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - hackathon_network
+
+  discovery-server:
+    build: 
+      context: ./backend/discovery-server
+    container_name: hackathon-discovery
+    ports:
+      - "8761:8761"
+    networks:
+      - hackathon_network
+
+  api-gateway:
+    build: 
+      context: ./backend/api-gateway
+    container_name: hackathon-gateway
+    ports:
+      - "8080:8080"
+    depends_on:
+      - discovery-server
+    networks:
+      - hackathon_network
+
+  user-service:
+    build: 
+      context: ./backend/user-service
+    container_name: hackathon-user-service
+    depends_on:
+      - postgres
+      - discovery-server
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/hackathon_db
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://discovery-server:8761/eureka
+    networks:
+      - hackathon_network
+
+  frontend:
+    build: 
+      context: ./frontend
+    container_name: hackathon-frontend
+    ports:
+      - "80:80"
+    depends_on:
+      - api-gateway
+    networks:
+      - hackathon_network
+
+volumes:
+  postgres_data:
+
+networks:
+  hackathon_network:
+    driver: bridge

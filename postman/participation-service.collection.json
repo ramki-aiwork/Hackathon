@@ -1,0 +1,61 @@
+{
+  "info": {
+    "name": "Hackathon - Participation Service",
+    "description": "API endpoints for Team Formation and Project Submissions",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Teams",
+      "item": [
+        {
+          "name": "Create Team",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{jwt_token}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"hackathonId\": \"1\",\n    \"name\": \"Code Ninjas\",\n    \"description\": \"Building the future!\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/teams",
+              "host": ["{{base_url}}"],
+              "path": ["api", "teams"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Submissions",
+      "item": [
+        {
+          "name": "Submit Project",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{jwt_token}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"teamId\": \"1\",\n    \"githubRepoUrl\": \"https://github.com/example/repo\",\n    \"demoVideoUrl\": \"https://youtube.com/example\",\n    \"description\": \"A revolutionary new service.\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/submissions",
+              "host": ["{{base_url}}"],
+              "path": ["api", "submissions"]
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "variable": [
+    { "key": "base_url", "value": "http://localhost:8080", "type": "string" },
+    { "key": "jwt_token", "value": "", "type": "string" }
+  ]
+}
